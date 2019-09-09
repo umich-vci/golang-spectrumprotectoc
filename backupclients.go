@@ -217,7 +217,7 @@ func (s *BackupClientsOp) RegisterNode(ctx context.Context, serverName string, c
 
 	path := serversBasePath + "/" + serverName + "/clients"
 
-	req, err := s.client.NewRequest(ctx, http.MethodPost, path, requestRoot.RegisterClient)
+	req, err := s.client.NewRequest(ctx, http.MethodPost, path, requestRoot)
 	if err != nil {
 		return nil, err
 	}
