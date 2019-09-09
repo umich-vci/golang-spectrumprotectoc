@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-const serversBasePath = "/servers"
+const serversBasePath = "/oc/api/servers"
 
 // BackupServers is an interface for interacting with
 // IBM Spectrum Protect backup servers

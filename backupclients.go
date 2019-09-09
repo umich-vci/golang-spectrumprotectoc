@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-const clientsBasePath = "/clients"
+const clientsBasePath = "/oc/api/clients"
 
 // BackupClient contains the elements that make up a backup client
 type BackupClient struct {

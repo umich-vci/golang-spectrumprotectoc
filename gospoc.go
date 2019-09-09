@@ -15,7 +15,7 @@ import (
 const (
 	libraryVersion = "0.1.0"
 	defaultBaseURL = "https://api.digitalocean.com/"
-	userAgent      = "gospectrumprotectoc/" + libraryVersion
+	userAgent      = "gospoc/" + libraryVersion
 	mediaType      = "application/json"
 )
 
@@ -67,7 +67,7 @@ func NewClient(config *Config) (*Client, error) {
 		return nil, fmt.Errorf("Invalid URL Scheme %s specified", config.URLScheme)
 	}
 
-	defaultBaseURL := "https://" + config.OCHost + "/oc/api"
+	defaultBaseURL := "https://" + config.OCHost
 	baseURL, err := url.Parse(defaultBaseURL)
 	if err != nil {
 		return nil, err

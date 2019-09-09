@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-const domainsBasePath = "/domains"
+const domainsBasePath = "/oc/api/domains"
 
 // BackupDomains is an interface for interacting with
 // IBM Spectrum Protect backup domains
