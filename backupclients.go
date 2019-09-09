@@ -10,26 +10,43 @@ const clientsBasePath = "/oc/api/clients"
 
 // BackupClient contains the elements that make up a backup client
 type BackupClient struct {
-	Platform string `json:"PLATFORM,string,omitempty"`
-	Domain   string `json:"DOMAIN,string,omitempty"`
-	Locked   int    `json:"LOCKED,int,omitempty"`
-	Server   string `json:"SERVER,string,omitempty"`
-	Version  int    `json:"VERSION,int,omitempty"`
-	VMOwner  string `json:"VM_OWNER,string,omitempty"`
-	GUID     string `json:"GUID,string,omitempty"`
-	Link     string `json:"LINK,string,omitempty"`
-	Type     int    `json:"TYPE,int,omitempty"`
-	VMType   int    `json:"VM_TYPE,int,omitempty"`
-	Name     string `json:"NAME,string,omitempty"`
+	Platform string `json:"PLATFORM"`
+	Domain   string `json:"DOMAIN"`
+	Locked   int    `json:"LOCKED"`
+	Server   string `json:"SERVER"`
+	Version  int    `json:"VERSION"`
+	VMOwner  string `json:"VM_OWNER"`
+	GUID     string `json:"GUID"`
+	Link     string `json:"LINK"`
+	Type     int    `json:"TYPE"`
+	VMType   int    `json:"VM_TYPE"`
+	Name     string `json:"NAME"`
 }
 
 type backupClientsRoot struct {
 	Clients      []BackupClient `json:"clients"`
-	ClientsCount int            `json:"clients_count,int"`
+	ClientsCount int            `json:"clients_count"`
+}
+
+// BackupClientDetail contains the elements that make up backup client details
+type BackupClientDetail struct {
+	Domain            string `json:"DOMAIN"`
+	Contact           string `json:"CONTACT"`
+	Locked            string `json:"LOCKED"`
+	Deduplication     string `json:"DEDUPLICATION"`
+	Email             string `json:"EMAIL"`
+	Name              string `json:"NAME"`
+	Authentication    string `json:"AUTHENTICATION"`
+	SessionInitiation string `json:"SESSIONINITIATION"`
+	Decommissioned    string `json:"DECOMMISSIONED"`
+	SSLRequired       string `json:"SSLREQUIRED"`
+	Link              string `json:"LINK"`
+	OptionSet         string `json:"OPTIONSET"`
+	SplitLargeObjects string `json:"SPLITLARGEOBJECTS"`
 }
 
 type clientDetailRoot struct {
-	ClientDetail *BackupClient `json:"clientdetail"`
+	ClientDetail *BackupClientDetail `json:"clientdetail"`
 }
 
 // RegisterClientRequest represents a request to register a backup client node.
@@ -83,7 +100,7 @@ type BackupClients interface {
 	AssignSchedule(ctx context.Context, serverName string, clientName string, scheduleDomain string, scheduleName string) (*http.Response, error)
 	Decommission(ctx context.Context, serverName string, clientName string) (*http.Response, error)
 	DecommissionVM(ctx context.Context, serverName string, clientName string, vmName string) (*http.Response, error)
-	Details(ctx context.Context, serverName string, clientName string) (*BackupClient, *http.Response, error)
+	Details(ctx context.Context, serverName string, clientName string) (*BackupClientDetail, *http.Response, error)
 	List(ctx context.Context) ([]BackupClient, *http.Response, error)
 	Lock(ctx context.Context, serverName string, clientName string) (*http.Response, error)
 	RegisterNode(ctx context.Context, serverName string, createRequest *RegisterClientRequest) (*http.Response, error)
@@ -127,7 +144,7 @@ func (s *BackupClientsOp) List(ctx context.Context) ([]BackupClient, *http.Respo
 }
 
 // Details of a specific backup client
-func (s *BackupClientsOp) Details(ctx context.Context, serverName string, clientName string) (*BackupClient, *http.Response, error) {
+func (s *BackupClientsOp) Details(ctx context.Context, serverName string, clientName string) (*BackupClientDetail, *http.Response, error) {
 	if serverName == "" {
 		return nil, nil, NewArgError("serverName", "cannot be empty")
 	}

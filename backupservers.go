@@ -22,34 +22,34 @@ type BackupServersOp struct {
 
 // BackupServer contains the elements that make up a backup server
 type BackupServer struct {
-	CatalogUsedSpace     int     `json:"CATALOG_USED_SPACE,int,omitempty"`
-	SurOcc               float64 `json:"SUR_OCC,float64,omitempty"`
-	SecLastCatalogBackup int     `json:"SEC_LAST_CATALOG_BACKUP,int,omitempty"`
-	NumAlerts            int     `json:"NUMALERTS,int,omitempty"`
-	ArchiveLogUsedSpace  int     `json:"ARCHIVELOG_USED_SPACE,int,omitempty"`
-	NumClients           int     `json:"NUMCLIENTS,int,omitempty"`
-	HasBackup            int     `json:"HAS_BACKUP,int,omitempty"`
-	ArchiveLog           string  `json:"ARCHIVELOG,string,omitempty"`
-	SecUptime            int     `json:"SEC_UPTIME,int,omitempty"`
-	SurOccTimestamp      string  `json:"SUROCC_TIMESTAMP,string,omitempty"`
-	ActiveLogUsedSpace   int     `json:"ACTIVELOG_USED_SPACE,int,omitempty"`
-	HasSpaceMG           int     `json:"HAS_SPACEMG,int,omitempty"`
-	Name                 string  `json:"NAME,string,omitempty"`
-	FETimestamp          string  `json:"FE_TIMESTAMP,string,omitempty"`
-	Role                 string  `json:"ROLE,string,omitempty"`
-	HasArchive           int     `json:"HAS_ARCHIVE,int,omitempty"`
-	Status               int     `json:"STATUS,int,omitempty"`
-	Catalog              string  `json:"CATALOG,string,omitempty"`
-	ActiveLog            string  `json:"ACTIVELOG,string,omitempty"`
-	Configured           int     `json:"CONFIGURED,int,omitempty"`
-	Link                 string  `json:"LINK,string,omitempty"`
-	VRMF                 string  `json:"VRMF,string,omitempty"`
-	FECapacityTB         float64 `json:"FE_CAPACITY_TB,float64,omitempty"`
+	CatalogUsedSpace     int     `json:"CATALOG_USED_SPACE"`
+	SurOcc               float64 `json:"SUR_OCC"`
+	SecLastCatalogBackup int     `json:"SEC_LAST_CATALOG_BACKUP"`
+	NumAlerts            int     `json:"NUMALERTS"`
+	ArchiveLogUsedSpace  int     `json:"ARCHIVELOG_USED_SPACE"`
+	NumClients           int     `json:"NUMCLIENTS"`
+	HasBackup            int     `json:"HAS_BACKUP"`
+	ArchiveLog           string  `json:"ARCHIVELOG"`
+	SecUptime            int     `json:"SEC_UPTIME"`
+	SurOccTimestamp      string  `json:"SUROCC_TIMESTAMP"`
+	ActiveLogUsedSpace   int     `json:"ACTIVELOG_USED_SPACE"`
+	HasSpaceMG           int     `json:"HAS_SPACEMG,int"`
+	Name                 string  `json:"NAME"`
+	FETimestamp          string  `json:"FE_TIMESTAMP"`
+	Role                 string  `json:"ROLE"`
+	HasArchive           int     `json:"HAS_ARCHIVE"`
+	Status               int     `json:"STATUS"`
+	Catalog              string  `json:"CATALOG"`
+	ActiveLog            string  `json:"ACTIVELOG"`
+	Configured           int     `json:"CONFIGURED"`
+	Link                 string  `json:"LINK"`
+	VRMF                 string  `json:"VRMF"`
+	FECapacityTB         float64 `json:"FE_CAPACITY_TB"`
 }
 
 type backupServersRoot struct {
 	Servers      []BackupServer `json:"servers"`
-	ServersCount int            `json:"servers_count,int"`
+	ServersCount int            `json:"servers_count"`
 }
 
 type serverDetailRoot struct {

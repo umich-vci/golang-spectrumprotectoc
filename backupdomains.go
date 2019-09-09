@@ -22,22 +22,22 @@ type BackupDomainsOp struct {
 
 // BackupDomain contains the elements that make up a backup domain
 type BackupDomain struct {
-	NumClients     int    `json:"NUM_CLIENTS,int,omitempty"`
-	DefDestArch    string `json:"DEFDESTARCH,string,omitempty"`
-	ProvidesBkup   int    `json:"PROVIDES_BKUP,int,omitempty"`
-	ServerStatus   int    `json:"SERVERSTATUS,int,omitempty"`
-	ScheduleCount  int    `json:"SCHEDULE_COUNT,int,omitempty"`
-	DefMC          string `json:"DEF_MC,string,omitempty"`
-	DefDestBkup    string `json:"DEFDESTBKUP,string,omitempty"`
-	DefDestSPMAN   string `json:"DEFDESTSPMAN,string,omitempty"`
-	Name           string `json:"NAME,string,omitempty"`
-	MgmtClassCount int    `json:"MGMTCLASS_COUNT,int,omitempty"`
-	Server         string `json:"SERVER,string,omitempty"`
-	ProvidesArch   int    `json:"PROVIDES_ARCH,int,omitempty"`
-	ProvidesSPMG   int    `json:"PROVIDES_SPMG,int,omitempty"`
-	Link           string `json:"LINK,string,omitempty"`
-	ID             string `json:"ID,string,omitempty"`
-	OptSetCount    int    `json:"OPTSET_COUNT,int,omitempty"`
+	NumClients     int    `json:"NUM_CLIENTS"`
+	DefDestArch    string `json:"DEFDESTARCH"`
+	ProvidesBkup   int    `json:"PROVIDES_BKUP"`
+	ServerStatus   int    `json:"SERVERSTATUS"`
+	ScheduleCount  int    `json:"SCHEDULE_COUNT"`
+	DefMC          string `json:"DEF_MC"`
+	DefDestBkup    string `json:"DEFDESTBKUP"`
+	DefDestSPMAN   string `json:"DEFDESTSPMAN"`
+	Name           string `json:"NAME"`
+	MgmtClassCount int    `json:"MGMTCLASS_COUNT"`
+	Server         string `json:"SERVER"`
+	ProvidesArch   int    `json:"PROVIDES_ARCH"`
+	ProvidesSPMG   int    `json:"PROVIDES_SPMG"`
+	Link           string `json:"LINK"`
+	ID             string `json:"ID"`
+	OptSetCount    int    `json:"OPTSET_COUNT"`
 }
 
 type backupDomainsRoot struct {
