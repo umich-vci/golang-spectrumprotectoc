@@ -3,6 +3,7 @@ package gospoc
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -26,6 +27,7 @@ type Config struct {
 	OCHost     string
 	APIVersion string
 	URLScheme  string
+	SSLVerify  bool
 }
 
 // Client is the API client for IBM Spectrum Protect Operations Center
@@ -69,6 +71,10 @@ func NewClient(config *Config) (*Client, error) {
 	baseURL, err := url.Parse(defaultBaseURL)
 	if err != nil {
 		return nil, err
+	}
+
+	if !config.SSLVerify {
+		http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	}
 
 	c := &Client{client: http.DefaultClient, BaseURL: baseURL, UserAgent: userAgent, Config: config}
