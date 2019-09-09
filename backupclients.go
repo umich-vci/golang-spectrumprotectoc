@@ -13,34 +13,38 @@ type BackupClient struct {
 	Platform string `json:"PLATFORM,string,omitempty"`
 	Domain   string `json:"DOMAIN,string,omitempty"`
 	Locked   int    `json:"LOCKED,int,omitempty"`
-	Server   string `json:"SERVER,int,omitempty"`
+	Server   string `json:"SERVER,string,omitempty"`
 	Version  int    `json:"VERSION,int,omitempty"`
-	VMOwner  string `json:"VM_OWNER,int,omitempty"`
-	GUID     string `json:"GUID,int,omitempty"`
+	VMOwner  string `json:"VM_OWNER,string,omitempty"`
+	GUID     string `json:"GUID,string,omitempty"`
 	Link     string `json:"LINK,string,omitempty"`
 	Type     int    `json:"TYPE,int,omitempty"`
 	VMType   int    `json:"VM_TYPE,int,omitempty"`
-	Name     string `json:"NAME,int,omitempty"`
+	Name     string `json:"NAME,string,omitempty"`
 }
 
 type backupClientsRoot struct {
 	Clients      []BackupClient `json:"clients"`
-	ClientsCount int            `json:"clients_count"`
+	ClientsCount int            `json:"clients_count,int"`
+}
+
+type clientDetailRoot struct {
+	ClientDetail *BackupClient `json:"clientdetail"`
 }
 
 // RegisterClientRequest represents a request to register a backup client node.
 type RegisterClientRequest struct {
-	Name              string `json:"name"`
-	Authentication    string `json:"authentication"`
-	Password          string `json:"password"`
-	Domain            string `json:"domain"`
-	Contact           string `json:"contact"`
-	Email             string `json:"email"`
-	Schedule          string `json:"schedule,omitempty"`
-	OptionSet         string `json:"optionset,omitempty"`
-	Deduplication     string `json:"deduplication,omitempty"`
-	SSLRequired       string `json:"sslrequired,omitempty"`
-	SessionInitiation string `json:"sessioninitiation,omitempty"`
+	Name              string `json:"name,string"`
+	Authentication    string `json:"authentication,string"`
+	Password          string `json:"password,string"`
+	Domain            string `json:"domain,string"`
+	Contact           string `json:"contact,string"`
+	Email             string `json:"email,string"`
+	Schedule          string `json:"schedule,string,omitempty"`
+	OptionSet         string `json:"optionset,string,omitempty"`
+	Deduplication     string `json:"deduplication,string,omitempty"`
+	SSLRequired       string `json:"sslrequired,string,omitempty"`
+	SessionInitiation string `json:"sessioninitiation,string,omitempty"`
 }
 
 type registerClientRequestRoot struct {
@@ -54,10 +58,10 @@ type backupSchedule struct {
 
 // UpdateClientRequest represents a request to update a backup client node.
 type UpdateClientRequest struct {
-	Password    string         `json:"password,omitempty"`
+	Password    string         `json:"password,string,omitempty"`
 	Schedule    backupSchedule `json:"schedule,omitempty"`
-	Lock        string         `json:"lock,omitempty"`
-	Decommision string         `json:"decommision,omitempty"`
+	Lock        string         `json:"lock,string,omitempty"`
+	Decommision string         `json:"decommision,string,omitempty"`
 }
 
 // BackupClientAtRisk contains the elements that make up a backup client at risk response

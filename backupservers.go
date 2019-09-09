@@ -49,15 +49,11 @@ type BackupServer struct {
 
 type backupServersRoot struct {
 	Servers      []BackupServer `json:"servers"`
-	ServersCount int            `json:"servers_count"`
+	ServersCount int            `json:"servers_count,int"`
 }
 
 type serverDetailRoot struct {
 	ServerDetail *BackupServer `json:"serverdetail"`
-}
-
-type clientDetailRoot struct {
-	ClientDetail *BackupClient `json:"clientdetail"`
 }
 
 // List all backup servers

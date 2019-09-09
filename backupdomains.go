@@ -42,7 +42,7 @@ type BackupDomain struct {
 
 type backupDomainsRoot struct {
 	Domains      []BackupDomains `json:"domains"`
-	DomainsCount int             `json:"domains_count"`
+	DomainsCount int             `json:"domains_count,int"`
 }
 
 type domainDetailRoot struct {
