@@ -60,6 +60,19 @@ type UpdateClientRequest struct {
 	Decommision string         `json:"decommision,omitempty"`
 }
 
+// BackupClientAtRisk contains the elements that make up a backup client at risk response
+type BackupClientAtRisk struct {
+	Server string `json:"SERVER,string,omitempty"`
+	AtRisk string `json:"AT_RISK,string,omitempty"`
+	Link   string `json:"LINK,string,omitempty"`
+	Type   int    `json:"TYPE,int,omitempty"`
+	Name   string `json:"NAME,string,omitempty"`
+}
+
+type backupClientAtRiskRoot struct {
+	ClientAtRisk *BackupClientAtRisk `json:"clientatrisk"`
+}
+
 // BackupClients is an interface for interacting with
 // IBM Spectrum Protect backup clients
 type BackupClients interface {
@@ -416,4 +429,30 @@ func (s *BackupClientsOp) Update(ctx context.Context, serverName string, clientN
 	}
 
 	return resp, err
+}
+
+// AtRisk status of a specific backup client
+func (s *BackupClientsOp) AtRisk(ctx context.Context, serverName string, clientName string) (*BackupClientAtRisk, *http.Response, error) {
+	if serverName == "" {
+		return nil, nil, NewArgError("serverName", "cannot be empty")
+	}
+
+	if clientName == "" {
+		return nil, nil, NewArgError("clientName", "cannot be empty")
+	}
+
+	path := serversBasePath + serverName + "/clients/" + clientName + "/atrisk"
+
+	req, err := s.client.NewRequest(ctx, http.MethodGet, path, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	root := new(backupClientAtRiskRoot)
+	resp, err := s.client.Do(ctx, req, root)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return root.ClientAtRisk, resp, err
 }
