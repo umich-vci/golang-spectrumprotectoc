@@ -108,6 +108,22 @@ type backupClientSchedulesRoot struct {
 	ClientSchedulesCount int                    `json:"clientschedules_count"`
 }
 
+// BackupClientFileSpace contains the elements that make up a backup client schedule response
+type BackupClientFileSpace struct {
+	FSLogicalMB float64 `json:"FSLOGICALMB"`
+	FSCopyPool  int     `json:"FSCOPYPOOL"`
+	Link        string  `json:"LINK"`
+	FSNumFiles  int     `json:"FSNUMFILES"`
+	ID          int     `json:"ID"`
+	FSType      string  `json:"FSTYPE"`
+	Name        string  `json:"NAME"`
+}
+
+type backupClientFilespacesRoot struct {
+	FileSpaces      []BackupClientFileSpace `json:"filespaces"`
+	FileSpacesCount int                     `json:"filespaces_count"`
+}
+
 // BackupClients is an interface for interacting with
 // IBM Spectrum Protect backup clients
 type BackupClients interface {
@@ -116,6 +132,7 @@ type BackupClients interface {
 	Decommission(ctx context.Context, serverName string, clientName string) (*http.Response, error)
 	DecommissionVM(ctx context.Context, serverName string, clientName string, vmName string) (*http.Response, error)
 	Details(ctx context.Context, serverName string, clientName string) (*BackupClientDetail, *http.Response, error)
+	FileSpaces(ctx context.Context, serverName string, clientName string) ([]BackupClientFileSpace, *http.Response, error)
 	List(ctx context.Context) ([]BackupClient, *http.Response, error)
 	Lock(ctx context.Context, serverName string, clientName string) (*http.Response, error)
 	RegisterNode(ctx context.Context, serverName string, createRequest *RegisterClientRequest) (*http.Response, error)
@@ -522,4 +539,30 @@ func (s *BackupClientsOp) Schedules(ctx context.Context, serverName string, doma
 	}
 
 	return root.ClientSchedules, resp, err
+}
+
+// FileSpaces of a specific backup client
+func (s *BackupClientsOp) FileSpaces(ctx context.Context, serverName string, clientName string) ([]BackupClientFileSpace, *http.Response, error) {
+	if serverName == "" {
+		return nil, nil, NewArgError("serverName", "cannot be empty")
+	}
+
+	if clientName == "" {
+		return nil, nil, NewArgError("clientName", "cannot be empty")
+	}
+
+	path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/filespaces"
+
+	req, err := s.client.NewRequest(ctx, http.MethodGet, path, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	root := new(backupClientFilespacesRoot)
+	resp, err := s.client.Do(ctx, req, root)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return root.FileSpaces, resp, err
 }
