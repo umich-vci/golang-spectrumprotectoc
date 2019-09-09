@@ -136,7 +136,7 @@ func (s *BackupClientsOp) Details(ctx context.Context, serverName string, client
 		return nil, nil, NewArgError("clientName", "cannot be empty")
 	}
 
-	path := serversBasePath + "/" + serverName + "/clients/" + clientName
+	path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/details"
 
 	req, err := s.client.NewRequest(ctx, http.MethodGet, path, nil)
 	if err != nil {
