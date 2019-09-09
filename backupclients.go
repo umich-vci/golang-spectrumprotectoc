@@ -136,7 +136,7 @@ func (s *BackupClientsOp) Details(ctx context.Context, serverName string, client
 		return nil, nil, NewArgError("clientName", "cannot be empty")
 	}
 
-	path := serversBasePath + serverName + "/clients/" + clientName
+	path := serversBasePath + "/" + serverName + "/clients/" + clientName
 
 	req, err := s.client.NewRequest(ctx, http.MethodGet, path, nil)
 	if err != nil {
@@ -165,7 +165,7 @@ func (s *BackupClientsOp) RegisterNode(ctx context.Context, serverName string, c
 	requestRoot := new(registerClientRequestRoot)
 	requestRoot.RegisterClient = createRequest
 
-	path := serversBasePath + serverName + "/clients"
+	path := serversBasePath + "/" + serverName + "/clients"
 
 	req, err := s.client.NewRequest(ctx, http.MethodPost, path, requestRoot.RegisterClient)
 	if err != nil {
@@ -193,7 +193,7 @@ func (s *BackupClientsOp) Lock(ctx context.Context, serverName string, clientNam
 
 	if s.client.Config.URLScheme == "7.1.4" {
 
-		path := serversBasePath + serverName + "/clients/" + clientName + "/lock"
+		path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/lock"
 
 		req, err := s.client.NewRequest(ctx, http.MethodPut, path, nil)
 		if err != nil {
@@ -227,7 +227,7 @@ func (s *BackupClientsOp) Unlock(ctx context.Context, serverName string, clientN
 	}
 
 	if s.client.Config.URLScheme == "7.1.4" {
-		path := serversBasePath + serverName + "/clients/" + clientName + "/unlock"
+		path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/unlock"
 
 		req, err := s.client.NewRequest(ctx, http.MethodPut, path, nil)
 		if err != nil {
@@ -269,7 +269,7 @@ func (s *BackupClientsOp) AssignSchedule(ctx context.Context, serverName string,
 		body := new(assignScheduleBody)
 		body.DefineSchedule.Schedule = scheduleName
 
-		path := serversBasePath + serverName + "/clients/" + clientName + "/assignschedule"
+		path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/assignschedule"
 
 		req, err := s.client.NewRequest(ctx, http.MethodPut, path, body)
 		if err != nil {
@@ -315,7 +315,7 @@ func (s *BackupClientsOp) UpdatePassword(ctx context.Context, serverName string,
 		body := new(updatePasswordBody)
 		body.UpdatePassword.Password = password
 
-		path := serversBasePath + serverName + "/clients/" + clientName + "/passwords"
+		path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/passwords"
 
 		req, err := s.client.NewRequest(ctx, http.MethodPut, path, body)
 		if err != nil {
@@ -349,7 +349,7 @@ func (s *BackupClientsOp) Decommission(ctx context.Context, serverName string, c
 	}
 
 	if s.client.Config.URLScheme == "7.1.4" {
-		path := serversBasePath + serverName + "/clients/" + clientName + "/decommissionclient"
+		path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/decommissionclient"
 
 		req, err := s.client.NewRequest(ctx, http.MethodPut, path, nil)
 		if err != nil {
@@ -381,10 +381,10 @@ func (s *BackupClientsOp) DecommissionVM(ctx context.Context, serverName string,
 		return nil, NewArgError("clientName", "cannot be empty")
 	}
 
-	path := serversBasePath + serverName + "/clients/" + clientName + "/vms/" + vmName + "/decommissionclient"
+	path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/vms/" + vmName + "/decommissionclient"
 
 	if s.client.Config.URLScheme == "7.1.4" {
-		path = serversBasePath + serverName + "/clients/" + clientName + "/vm/" + vmName + "/decommissionclient"
+		path = serversBasePath + "/" + serverName + "/clients/" + clientName + "/vm/" + vmName + "/decommissionclient"
 	}
 
 	req, err := s.client.NewRequest(ctx, http.MethodPut, path, nil)
@@ -419,7 +419,7 @@ func (s *BackupClientsOp) Update(ctx context.Context, serverName string, clientN
 		return nil, NewArgError("update", "cannot be nil")
 	}
 
-	path := serversBasePath + serverName + "/clients/" + clientName
+	path := serversBasePath + "/" + serverName + "/clients/" + clientName
 
 	req, err := s.client.NewRequest(ctx, http.MethodPut, path, update)
 	if err != nil {
@@ -445,7 +445,7 @@ func (s *BackupClientsOp) AtRisk(ctx context.Context, serverName string, clientN
 		return nil, nil, NewArgError("clientName", "cannot be empty")
 	}
 
-	path := serversBasePath + serverName + "/clients/" + clientName + "/atrisk"
+	path := serversBasePath + "/" + serverName + "/clients/" + clientName + "/atrisk"
 
 	req, err := s.client.NewRequest(ctx, http.MethodGet, path, nil)
 	if err != nil {

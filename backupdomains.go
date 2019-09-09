@@ -71,7 +71,7 @@ func (s *BackupDomainsOp) Get(ctx context.Context, serverName string, domainName
 		return nil, nil, NewArgError("serverName", "cannot be empty")
 	}
 
-	path := serversBasePath + serverName + "/domains/" + domainName + "/details"
+	path := serversBasePath + "/" + serverName + "/domains/" + domainName + "/details"
 
 	req, err := s.client.NewRequest(ctx, http.MethodGet, path, nil)
 	if err != nil {
