@@ -36,9 +36,9 @@ type RegisterClientRequest struct {
 	Domain            string `json:"domain"`
 	Contact           string `json:"contact"`
 	Email             string `json:"email"`
-	Schedule          bool   `json:"schedule,omitempty"`
+	Schedule          string `json:"schedule,omitempty"`
 	OptionSet         string `json:"optionset,omitempty"`
-	Deduplication     bool   `json:"deduplication,omitempty"`
+	Deduplication     string `json:"deduplication,omitempty"`
 	SSLRequired       string `json:"sslrequired,omitempty"`
 	SessionInitiation string `json:"sessioninitiation,omitempty"`
 }
