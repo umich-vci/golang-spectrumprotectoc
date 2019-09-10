@@ -51,17 +51,17 @@ type clientDetailRoot struct {
 
 // RegisterClientRequest represents a request to register a backup client node.
 type RegisterClientRequest struct {
-	Name              string `json:"name,string"`
-	Authentication    string `json:"authentication,string"`
-	Password          string `json:"password,string"`
-	Domain            string `json:"domain,string"`
-	Contact           string `json:"contact,string"`
-	Email             string `json:"email,string"`
-	Schedule          string `json:"schedule,string,omitempty"`
-	OptionSet         string `json:"optionset,string,omitempty"`
-	Deduplication     string `json:"deduplication,string,omitempty"`
-	SSLRequired       string `json:"sslrequired,string,omitempty"`
-	SessionInitiation string `json:"sessioninitiation,string,omitempty"`
+	Name              string `json:"name"`
+	Authentication    string `json:"authentication"`
+	Password          string `json:"password"`
+	Domain            string `json:"domain"`
+	Contact           string `json:"contact"`
+	Email             string `json:"email"`
+	Schedule          string `json:"schedule,omitempty"`
+	OptionSet         string `json:"optionset,omitempty"`
+	Deduplication     string `json:"deduplication,omitempty"`
+	SSLRequired       string `json:"sslrequired,omitempty"`
+	SessionInitiation string `json:"sessioninitiation,omitempty"`
 }
 
 type registerClientRequestRoot struct {
@@ -69,16 +69,16 @@ type registerClientRequestRoot struct {
 }
 
 type backupSchedule struct {
-	Domain   string `json:"domain,string,omitempty"`
-	Schedule string `json:"schedule,string,omitempty"`
+	Domain   string `json:"domain,omitempty"`
+	Schedule string `json:"schedule,omitempty"`
 }
 
 // UpdateClientRequest represents a request to update a backup client node.
 type UpdateClientRequest struct {
-	Password    string         `json:"password,string,omitempty"`
+	Password    string         `json:"password,omitempty"`
 	Schedule    backupSchedule `json:"schedule,omitempty"`
-	Lock        string         `json:"lock,string,omitempty"`
-	Decommision string         `json:"decommision,string,omitempty"`
+	Lock        string         `json:"lock,omitempty"`
+	Decommision string         `json:"decommision,omitempty"`
 }
 
 // BackupClientAtRisk contains the elements that make up a backup client at risk response
@@ -222,8 +222,8 @@ func (s *BackupClientsOp) RegisterNode(ctx context.Context, serverName string, c
 		return nil, err
 	}
 
-	root := new(registerClientRequestRoot)
-	resp, err := s.client.Do(ctx, req, root)
+	//root := new(registerClientRequestRoot)
+	resp, err := s.client.Do(ctx, req, nil)
 	if err != nil {
 		return resp, err
 	}

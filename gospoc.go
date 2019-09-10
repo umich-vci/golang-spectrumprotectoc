@@ -17,6 +17,7 @@ const (
 	defaultBaseURL = "https://api.digitalocean.com/"
 	userAgent      = "gospoc/" + libraryVersion
 	mediaType      = "application/json"
+	mediaType714   = "text/plain"
 )
 
 // Config defines the configuration needed to connect to the
@@ -116,6 +117,13 @@ func (c *Client) NewRequest(ctx context.Context, method, urlStr string, body int
 	req.Header.Add("Accept", mediaType)
 	req.Header.Add("User-Agent", c.UserAgent)
 	req.Header.Add("OC-API-Version", c.Config.APIVersion)
+
+	// 7.1.4 expects all content to be text/plain
+	// http://www.backupcentral.com/forum/5/280222/help_running_commands_via_the_tsm_rest_api
+	if c.Config.URLScheme == "7.1.4" {
+		req.Header.Set("Content-Type", mediaType714)
+	}
+
 	return req, nil
 }
 
