@@ -38,6 +38,7 @@ type Client struct {
 
 	UserAgent string
 
+	CLI     CLI
 	Clients BackupClients
 	Domains BackupDomains
 	Servers BackupServers
@@ -78,6 +79,7 @@ func NewClient(config *Config) (*Client, error) {
 	}
 
 	c := &Client{client: http.DefaultClient, BaseURL: baseURL, UserAgent: userAgent, Config: config}
+	c.CLI = &CLIOp{client: c}
 	c.Clients = &BackupClientsOp{client: c}
 	c.Servers = &BackupServersOp{client: c}
 
