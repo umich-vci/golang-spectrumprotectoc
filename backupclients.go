@@ -199,6 +199,10 @@ func (s *BackupClientsOp) Details(ctx context.Context, serverName string, client
 		return nil, resp, err
 	}
 
+	if root.ClientDetail == nil {
+		return nil, resp, fmt.Errorf("Unable to find client %s on server %s", clientName, serverName)
+	}
+
 	return root.ClientDetail, resp, err
 }
 
